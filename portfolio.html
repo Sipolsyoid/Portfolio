@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — Portfolio</title>
+
+<!--
+  HOW TO EDIT THIS PAGE
+  ----------------------
+  Everything you need to change is marked with an "✎ EDIT" comment below.
+  Just replace the placeholder text between the tags with your own — the
+  styling will take care of itself. Sections, in order:
+    1. Nav / name mark
+    2. Hero (name, role, intro, photo)
+    3. About (bio + quick facts)
+    4. Selected work (3 sample project entries — copy/paste the <li> to add more)
+    5. Skills & tools
+    6. Contact links
+    7. Footer
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --fog:        #ECEEE9;
+    --fog-deep:   #E1E4DC;
+    --ink:        #181C19;
+    --ink-soft:   #4B564F;
+    --moss:       #3E6259;
+    --moss-deep:  #2C4740;
+    --brass:      #B8935A;
+    --line:       #C7CCC0;
+    --paper:      #F5F6F2;
+    --max: 1080px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--fog);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3{
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    line-height: 1.1;
+    margin: 0;
+    color: var(--ink);
+  }
+  p{ margin: 0; }
+  a{ color: var(--moss); text-decoration: none; }
+  a:hover{ color: var(--moss-deep); }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--moss);
+    outline-offset: 3px;
+  }
+  ul, dl{ margin:0; padding:0; list-style:none; }
+
+  .wrap{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 28px 32px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .nav-mark{
+    font-family:'Fraunces', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .nav-mark:hover{ color: var(--moss); }
+  .nav-links{ display:flex; gap: 28px; }
+  .nav-links a{
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+  }
+  .nav-links a:hover{
+    color: var(--ink);
+    border-bottom-color: var(--brass);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 48px 32px 96px;
+    display: grid;
+    grid-template-columns: 1.3fr 0.9fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .hero-text > * + *{ margin-top: 20px; }
+  .hero-text h1{
+    font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+    letter-spacing: -0.01em;
+  }
+  .hero-role{
+    font-size: 1.15rem;
+    color: var(--moss-deep);
+    font-weight: 500;
+  }
+  .hero-intro{
+    max-width: 46ch;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+  }
+  .hero-actions{
+    display:flex;
+    gap: 16px;
+    margin-top: 32px !important;
+    flex-wrap: wrap;
+  }
+  .btn-primary, .btn-secondary{
+    display:inline-block;
+    padding: 12px 22px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 2px;
+  }
+  .btn-primary{
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn-primary:hover{ background: var(--moss-deep); color: var(--paper); }
+  .btn-secondary{
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .btn-secondary:hover{ border-color: var(--ink); color: var(--ink); }
+
+  .hero-portrait{
+    aspect-ratio: 4 / 5;
+    background: var(--moss);
+    box-shadow: 14px 14px 0 0 var(--brass);
+    margin: 0 22px 22px 0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .hero-portrait span{
+    font-family:'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    color: var(--fog);
+  }
+
+  /* entrance, once, on load only */
+  .hero-text > *{
+    opacity: 0;
+    animation: rise 0.7s ease forwards;
+  }
+  .hero-text > *:nth-child(1){ animation-delay: 0.05s; }
+  .hero-text > *:nth-child(2){ animation-delay: 0.15s; }
+  .hero-text > *:nth-child(3){ animation-delay: 0.25s; }
+  .hero-text > *:nth-child(4){ animation-delay: 0.35s; }
+  .hero-portrait{ opacity: 0; animation: rise 0.8s ease 0.2s forwards; }
+  @keyframes rise{
+    from{ opacity: 0; transform: translateY(14px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-text > *, .hero-portrait{ animation: none; opacity: 1; }
+  }
+
+  /* ---------- Sections (shared) ---------- */
+  .section{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 72px 32px;
+    border-top: 1px solid var(--line);
+  }
+  .section-band{ background: var(--fog-deep); }
+  .section-band > .section-inner{
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+  .section h2{
+    font-size: 1.7rem;
+    margin-bottom: 36px;
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1fr 260px;
+    gap: 56px;
+  }
+  .about-bio{
+    max-width: 60ch;
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+  }
+  .quick-facts > div{
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+  }
+  .quick-facts > div:last-child{ border-bottom: 1px solid var(--line); }
+  .quick-facts dt{
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .quick-facts dd{
+    margin: 0;
+    font-weight: 500;
+  }
+
+  /* ---------- Work ---------- */
+  .work-list{ display:flex; flex-direction:column; }
+  .work-item{
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+  }
+  .work-list li:last-child{ border-bottom: 1px solid var(--line); }
+  .work-item-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .work-item h3{
+    font-size: 1.35rem;
+    font-weight: 500;
+  }
+  .work-year{
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  .work-item p{
+    max-width: 62ch;
+    color: var(--ink-soft);
+    margin-top: 10px;
+  }
+  .work-tags{
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .work-tags span{
+    font-size: 0.82rem;
+    color: var(--moss-deep);
+    background: rgba(62,98,89,0.1);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .work-link{
+    display:inline-block;
+    margin-top: 14px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--moss);
+  }
+  .work-link:hover{ border-bottom-color: var(--moss-deep); }
+
+  /* ---------- Skills ---------- */
+  .skills-row{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .skills-row li{
+    font-size: 0.95rem;
+    padding: 9px 16px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-intro{
+    max-width: 52ch;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    margin-bottom: 32px;
+  }
+  .contact-links{
+    display:flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .contact-links a{
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    color: var(--ink);
+    width: fit-content;
+    border-bottom: 1px solid transparent;
+  }
+  .contact-links a:hover{
+    color: var(--moss-deep);
+    border-bottom-color: var(--brass);
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 28px 32px 48px;
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 780px){
+    .hero{ grid-template-columns: 1fr; padding-bottom: 56px; }
+    .hero-portrait{ max-width: 280px; }
+    .about-grid{ grid-template-columns: 1fr; }
+    .section{ padding: 52px 24px; }
+    .nav{ padding: 22px 24px; }
+    .nav-links{ gap: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <!-- ✎ EDIT: your name (also shown in the hero below) -->
+  <a class="nav-mark" href="#top">Daniel</a>
+  <nav class="nav-links">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- ---------- HERO ---------- -->
+<section class="hero" id="top">
+  <div class="hero-text">
+    <!-- ✎ EDIT: your name -->
+    <h1>Daniel</h1>
+    <!-- ✎ EDIT: your role/title -->
+    <p class="hero-role">Programmer</p>
+    <!-- ✎ EDIT: a short intro, 2–3 sentences, in your own voice -->
+    <p class="hero-intro">
+      I’m a 19-year-old student studying programming at VTDT Technical School. I’m interested in programming.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#work">My Work</a>
+      <a class="btn-secondary" href="#contact">Get in touch</a>
+    </div>
+  </div>
+  <!-- ✎ EDIT: replace this box with <img src="your-photo.jpg" alt="Your Name" style="width:100%;aspect-ratio:4/5;object-fit:cover;">
+       or swap the initials "YN" for your own -->
+  <div class="hero-portrait" aria-hidden="true">
+
+    <span>Sīpols</span>
+<img src="boss.jpeg" alt="Your Name" style="width:100%;aspect-ratio:4/5;object-fit:cover;">
+  </div>
+</section>
+
+<!-- ---------- ABOUT ---------- -->
+<section class="section-band">
+  <div class="section-inner section" style="border-top:none;">
+    <h2>About</h2>
+    <div class="about-grid">
+     
+      <dl class="quick-facts">
+        <!-- ✎ EDIT: quick facts -->
+        <div><dt>Based in</dt><dd>Liepāja</dd></div>
+        <div><dt>Currently</dt><dd>Studying programming</dd></div>
+        <div><dt>Available for</dt><dd>Part-time/internship</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- WORK ---------- -->
+<section class="section" id="work">
+  <h2>Selected work</h2>
+  <ul class="work-list">
+    <!-- ✎ EDIT: project 1 — copy this <li> block to add more -->
+    <li class="work-item">
+      <div class="work-item-top">
+        <h3>Clashstats</h3>
+        <span class="work-year">2024</span>
+      </div>
+      <p>This is a webpage to check clash royale card stats</p>
+      <div class="work-tags"><span>School project</span><span>html</span></div>
+      <a class="work-link" href="https://github.com/yoid22/clashstats.git">View project</a>
+    </li>
+    <!-- ✎ EDIT: project 2 -->
+    <li class="work-item">
+      <div class="work-item-top">
+        <h3>Becoming</h3>
+        <span class="work-year">2026</span>
+      </div>
+      <p>A webpage to help people stick to there habits</p>
+      <div class="work-tags"><span>Solo-project</span><span>laravel</span></div>
+      <a class="work-link" href="https://github.com/sipislohs29-gif/Becoming.git">View project</a>
+    </li>
+   
+  </ul>
+</section>
+
+<!-- ---------- SKILLS ---------- -->
+<section class="section-band">
+  <div class="section-inner section" style="border-top:none;">
+    <h2>Skills &amp; tools</h2>
+    <!-- ✎ EDIT: swap these for your own skills/tools -->
+    <ul class="skills-row">
+      <li>Laravel</li>
+      <li>PHP</li>
+      <li>html</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <li>C++</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ---------- CONTACT ---------- -->
+<section class="section" id="contact">
+  <h2>Get in touch</h2>
+  <!-- ✎ EDIT: contact intro line -->
+  
+  <!-- ✎ EDIT: your real links -->
+  <div class="contact-links">
+    <a href="mailto:[email protected]">22sipols22@gmail.com</a>
+    
+    <a href="https://github.com/sipislohs29-gif" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</section>
+
+<footer>
+  <!-- ✎ EDIT: your name / year -->
+  <p>© 2026 Daniels.</p>
+</footer>
+
+</body>
+</html>
