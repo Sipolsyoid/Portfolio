@@ -1,6 +1,6 @@
 # Daniel's portfolio
 
-A responsive, static portfolio built with HTML, CSS, and a small navigation script. No build step or dependencies are required.
+A responsive, static portfolio built with HTML, CSS, and a small copyright-year script. No build step or dependencies are required.
 
 ## Preview
 
